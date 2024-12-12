@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
 @RestController
 @RequestMapping({"api/Docter_Admin"})
 public class DocterAdminController {
+
     @Autowired
     DocterAdminService docterAdminService;
 
@@ -32,13 +30,12 @@ public class DocterAdminController {
         return ResponseEntity.ok(docter);
     }
 
-    @GetMapping({"/{Id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<DocterAdmin> getDocterAdminById(@PathVariable String id) {
         DocterAdmin docterAdmin = docterAdminService.getDocterAdminById(id);
-        //Optional<DocterAdmin> docter = docterAdminRepository.findById(1001);
-        return docterAdmin != null ? ResponseEntity.ok(docterAdmin) : ResponseEntity.notFound().build();
-        //return ResponseEntity.ok(docter);
-        //return ResponseEntity.ok(Id);
+        return docterAdmin != null 
+            ? ResponseEntity.ok(docterAdmin) 
+            : ResponseEntity.notFound().build();
     }
 
     @GetMapping
@@ -49,14 +46,17 @@ public class DocterAdminController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DocterAdmin> updateDocterAdmin(@PathVariable String id, @RequestBody DocterAdmin docterAdmin) {
-        DocterAdmin docter = docterAdminService.updateDocterAdmin(id,docterAdmin);
-        return docter != null ? ResponseEntity.ok(docter) : ResponseEntity.notFound().build();
+        DocterAdmin updatedDocterAdmin = docterAdminService.updateDocterAdmin(id, docterAdmin);
+        return updatedDocterAdmin != null 
+            ? ResponseEntity.ok(updatedDocterAdmin) 
+            : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping({"/{Id}"})
-    public ResponseEntity<String> deleterDocterAdmin(@PathVariable String id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDocterAdmin(@PathVariable String id) {
         String result = docterAdminService.deleteDocteradmin(id);
-        return ResponseEntity.ok(result);
+        return result != null 
+            ? ResponseEntity.ok(result) 
+            : ResponseEntity.notFound().build();
     }
-
 }
