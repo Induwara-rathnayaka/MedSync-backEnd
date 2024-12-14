@@ -11,26 +11,23 @@ import com.medsync.Medsync_booking.Model.Docter;
 import com.medsync.Medsync_booking.Service.DocterService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping({"api/Docter"})
+@RequestMapping({"Docter"})
 public class DocterController {
 
     @Autowired
     DocterService docterService;
 
-    @PostMapping()
+    @PostMapping({"/create"})
     public ResponseEntity<Docter> createDopcter(@RequestBody Docter docter) {
         Docter createdocter = docterService.creatDocter(docter);
         return ResponseEntity.ok(createdocter);
     }
     
-    @GetMapping({"/{id}"})
+    @PostMapping({"/getById/{id}"})
     public ResponseEntity<Docter> getDocterByID(@PathVariable String id) {
         Docter getDocter = docterService.getDocterById(id);
         return getDocter != null 
@@ -38,13 +35,13 @@ public class DocterController {
         : ResponseEntity.notFound().build();
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Docter>> getMethodName() {
+    @PostMapping({"/getAll"})
+    public ResponseEntity<List<Docter>> getAllDocter() {
         List<Docter> docters = docterService.getAllDocter();
         return ResponseEntity.ok(docters);
     }
 
-    @PutMapping({"/{id}"})
+    @PostMapping({"/upload/{id}"})
     public ResponseEntity<Docter> updateDocter(@PathVariable String id, @RequestBody Docter docter) {
         Docter upDocter = docterService.updateDocter(id, docter);        
         return upDocter != null 
@@ -52,7 +49,7 @@ public class DocterController {
         : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<String> deleteDocter(@PathVariable String id) {
         String result = docterService.deleteDocter(id);
         return result != null 
