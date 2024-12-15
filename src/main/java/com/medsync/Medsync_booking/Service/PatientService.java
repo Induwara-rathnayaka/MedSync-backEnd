@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.medsync.Medsync_booking.Model.Patient;
 import com.medsync.Medsync_booking.Repository.PatientRepositery;
 
+@Service
 public class PatientService {
 
     @Autowired

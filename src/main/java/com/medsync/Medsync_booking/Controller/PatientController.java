@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medsync.Medsync_booking.Model.Patient;
 import com.medsync.Medsync_booking.Service.PatientService;
 
+
 @RestController
 @RequestMapping("patient")
 public class PatientController {
