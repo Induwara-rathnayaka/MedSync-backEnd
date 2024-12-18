@@ -13,7 +13,7 @@ import com.medsync.Medsync_booking.Service.DocterAdminService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
-
+//http://localhost:8080/swagger-ui/index.html#/
 @RestController
 @RequestMapping({"Docter_Admin"})
 public class DocterAdminController {
