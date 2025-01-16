@@ -30,7 +30,7 @@ public class SheduleService {
 
     public Shedule updateShedule(String id , Shedule shedule){
         if (Repo.existsById(id)) {
-            shedule.setDocterID(id);
+            shedule.setID(id);
             return Repo.save(shedule);
         }
         return null;

@@ -1,5 +1,7 @@
 package com.medsync.Medsync_booking.Model;
 
+import java.time.LocalDate;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,10 +15,15 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document(collection = "Docter_Admin")
-public class DocterAdmin {
+@Document(collation = "Channel")
+public class Channelling {
+
     @Id
-    private String docterID;
-    private String docterPassword;
-    private String status;
+    private String id;
+    private String PatientID;
+    private String DocterID;
+    private String paymentMethod;
+    private LocalDate day;
+    private String time;
+
 }

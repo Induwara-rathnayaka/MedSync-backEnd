@@ -29,7 +29,7 @@ public class DocterAdminService {
 
     public DocterAdmin updateDocterAdmin(String id , DocterAdmin docterAdmin){
         if (Repo.existsById(id)) {
-            docterAdmin.setId(id);
+            docterAdmin.setDocterID(id);
             return Repo.save(docterAdmin);
         }
         return null;

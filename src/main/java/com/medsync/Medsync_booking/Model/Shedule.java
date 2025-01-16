@@ -19,6 +19,7 @@ import lombok.Setter;
 public class Shedule {
     
     @Id
+    private String ID;
     private String docterID;
     private LocalDate day;
     private String time;

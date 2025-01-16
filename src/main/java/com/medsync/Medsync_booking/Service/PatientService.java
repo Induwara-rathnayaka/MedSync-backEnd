@@ -30,7 +30,7 @@ public class PatientService {
 
     public Patient updatePatient(String id , Patient patient){
         if (Repo.existsById(id)) {
-            patient.setId(id);
+            patient.setNIC(id);
             return Repo.save(patient);
         }
         return null;
