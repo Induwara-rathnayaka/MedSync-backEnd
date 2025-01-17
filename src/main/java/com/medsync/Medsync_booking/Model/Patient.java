@@ -20,7 +20,7 @@ public class Patient {
     private String NIC;
     private String name;
     private String ContactNo;
-    private String Address;
     private String email;
-    
+    private String Password;
+        
 }

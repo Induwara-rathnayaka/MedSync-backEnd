@@ -15,9 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document(collation = "Channel")
-public class Channelling {
-
+@Document(collection = "Booking")
+public class Booking {
     @Id
     private String id;
     private String PatientID;
@@ -25,5 +24,4 @@ public class Channelling {
     private String paymentMethod;
     private LocalDate day;
     private String time;
-
 }
