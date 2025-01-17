@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +30,7 @@ public class PatientController {
         return ResponseEntity.ok(createPatient);
     }
     
-    @PostMapping({"/getById/{id}"})
+    @GetMapping({"/getById/{id}"})
     public ResponseEntity<Patient> getPatientByID(@PathVariable String id) {
         Patient getPatient = patientService.getPatientById(id);
         return getPatient != null 
@@ -35,13 +38,13 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping({"/getAll"})
+    @GetMapping({"/getAll"})
     public ResponseEntity<List<Patient>> getAllPatient() {
         List<Patient> patients = patientService.getAllPatient();
         return ResponseEntity.ok(patients);
     }
 
-    @PostMapping({"/upload/{id}"})
+    @PutMapping({"/upload/{id}"})
     public ResponseEntity<Patient> updatePatient(@PathVariable String id, @RequestBody Patient docter) {
         Patient upPatienn = patientService.updatePatient(id, docter);        
         return upPatienn != null 
@@ -49,7 +52,7 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable String id) {
         String result = patientService.deletePatient(id);
         return result != null 

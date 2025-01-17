@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medsync.Medsync_booking.Model.Docter;
 import com.medsync.Medsync_booking.Service.DocterService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -27,7 +30,7 @@ public class DocterController {
         return ResponseEntity.ok(createdocter);
     }
     
-    @PostMapping({"/getById/{id}"})
+    @GetMapping({"/getById/{id}"})
     public ResponseEntity<Docter> getDocterByID(@PathVariable String id) {
         Docter getDocter = docterService.getDocterById(id);
         return getDocter != null 
@@ -35,13 +38,13 @@ public class DocterController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping({"/getAll"})
+    @GetMapping({"/getAll"})
     public ResponseEntity<List<Docter>> getAllDocter() {
         List<Docter> docters = docterService.getAllDocter();
         return ResponseEntity.ok(docters);
     }
 
-    @PostMapping({"/upload/{id}"})
+    @PutMapping({"/update/{id}"})
     public ResponseEntity<Docter> updateDocter(@PathVariable String id, @RequestBody Docter docter) {
         Docter upDocter = docterService.updateDocter(id, docter);        
         return upDocter != null 
@@ -49,7 +52,7 @@ public class DocterController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDocter(@PathVariable String id) {
         String result = docterService.deleteDocter(id);
         return result != null 

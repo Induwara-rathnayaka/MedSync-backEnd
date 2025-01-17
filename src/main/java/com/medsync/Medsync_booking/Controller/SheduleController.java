@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +29,7 @@ public class SheduleController {
         return ResponseEntity.ok(createShedule);
     }
     
-    @PostMapping({"/getByID/{id}"})
+    @GetMapping({"/getByID/{id}"})
     public ResponseEntity<Shedule> getSheduleByID(@PathVariable String id) {
         Shedule getShedule = sheduleService.getSheduleById(id);
         return getShedule != null 
@@ -34,13 +37,13 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping({"/getAll"})
+    @GetMapping({"/getAll"})
     public ResponseEntity<List<Shedule>> getAllShedule() {
         List<Shedule> Sheduless = sheduleService.getAllShedule();
         return ResponseEntity.ok(Sheduless);
     }
 
-    @PostMapping({"/update/{id}"})
+    @PutMapping({"/update/{id}"})
     public ResponseEntity<Shedule> updateShedule(@PathVariable String id, @RequestBody Shedule shedule) {
         Shedule upShedule = sheduleService.updateShedule(id, shedule);        
         return upShedule != null 
@@ -48,7 +51,7 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteShedule(@PathVariable String id) {
         String result = sheduleService.deleteShedule(id);
         return result != null 
