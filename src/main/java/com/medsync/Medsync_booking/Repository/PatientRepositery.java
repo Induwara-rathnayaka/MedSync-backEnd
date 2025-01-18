@@ -6,4 +6,6 @@ import com.medsync.Medsync_booking.Model.Patient;
 
 public interface PatientRepositery extends MongoRepository<Patient,String> {
 
+    Patient findByEmail(String email);
+
 }

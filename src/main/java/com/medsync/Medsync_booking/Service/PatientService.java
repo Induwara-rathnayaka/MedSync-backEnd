@@ -43,4 +43,8 @@ public class PatientService {
         }
         return "Patient not found";
     }
+
+    public Patient FindByEmail(String email) {
+        return Repo.findByEmail(email);
+    }
 }

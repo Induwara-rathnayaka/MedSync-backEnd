@@ -15,8 +15,9 @@ import lombok.Setter;
 
 @Document(collection = "Docter_Admin")
 public class DocterAdmin {
+    
     @Id
     private String docterID;
     private String docterPassword;
-    private String status;
+    private String status;  
 }

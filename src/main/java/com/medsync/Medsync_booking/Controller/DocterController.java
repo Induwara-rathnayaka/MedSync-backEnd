@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+
 @RestController
 @RequestMapping({"Docter"})
 public class DocterController {
@@ -59,5 +60,4 @@ public class DocterController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
-    
 }

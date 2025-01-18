@@ -59,4 +59,10 @@ public class PatientController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
-}
+
+    @GetMapping("/getByEmail/{email}")
+    public ResponseEntity<Patient> getByEmail(@PathVariable String email){
+        Patient patient = patientService.FindByEmail(email);
+        return ResponseEntity.ok(patient);
+    }
+ }
