@@ -43,4 +43,8 @@ public class DocterService {
         return "Docter not found";
     }
 
+    public List<Docter> fingBySpecialty(String specialty){
+        return Repo.findBySpecialty(specialty);
+    }
+
 }

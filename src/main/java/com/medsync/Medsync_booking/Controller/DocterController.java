@@ -60,4 +60,10 @@ public class DocterController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/getByspecialty/{specialty}")
+    public ResponseEntity<List<Docter>> getDocterBySpecialty(@PathVariable String specialty){
+        List<Docter> docters = docterService.fingBySpecialty(specialty);
+        return ResponseEntity.ok(docters);
+    }
 }
