@@ -43,5 +43,9 @@ public class SheduleService {
         }
         return "Shedule not found";
     }
+
+    public List<Shedule> getbyDocterID(String docterID){
+        return Repo.findByDocterID(docterID);
+    }
 }
 

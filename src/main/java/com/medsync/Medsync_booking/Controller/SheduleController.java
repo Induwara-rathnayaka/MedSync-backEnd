@@ -58,4 +58,10 @@ public class SheduleController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/getByDocterID/{docterID}")
+    public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String docterID){
+        List<Shedule> shedules = sheduleService.getbyDocterID(docterID);
+        return ResponseEntity.ok(shedules);
+     }
 }
