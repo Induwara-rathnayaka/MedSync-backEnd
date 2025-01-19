@@ -16,7 +16,15 @@ public class PatientService {
     PatientRepositery Repo;
 
     public Patient creatPatient(Patient patient){
-        return Repo.save(patient);
+
+        Optional<Patient> searchPatient = Repo.findByEmail(patient.getEmail());
+
+        //save user unique email 
+        if(searchPatient.isPresent()){
+           return null;
+        }else{
+            return Repo.save(patient);
+        }  
     }
 
     public Patient getPatientById(String id){
@@ -42,5 +50,10 @@ public class PatientService {
             return "Delete Suscessfull";
         }
         return "Patient not found";
+    }
+
+    public Patient FindByEmail(String email) {
+        Optional<Patient> patient = Repo.findByEmail(email);
+        return patient.orElse(null);
     }
 }

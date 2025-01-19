@@ -13,10 +13,11 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document(collection = "Docter_Admin")
-public class DocterAdmin {
+@Document(collection = "Admin")
+public class Admin {
+
     @Id
-    private String docterID;
-    private String docterPassword;
-    private String status;
+    private String adminId;
+    private String password;
+
 }

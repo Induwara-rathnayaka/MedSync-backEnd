@@ -1,5 +1,6 @@
 package com.medsync.Medsync_booking.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,12 @@ public class SheduleService {
     SheduleRepository Repo;
 
     public Shedule creatShedule(Shedule shedule){
-        return Repo.save(shedule);
+        Optional<Shedule> shOptional = Repo.findByDocterIDAndDayAndTime(shedule.getDocterID(),shedule.getDay(),shedule.getTime());
+        if(shOptional.isPresent()){
+            return null;
+        }else{
+            return Repo.save(shedule);
+        }
     }
 
     public Shedule getSheduleById(String id){
@@ -42,6 +48,15 @@ public class SheduleService {
             return "Delete Suscessfull";
         }
         return "Shedule not found";
+    }
+
+    public List<Shedule> getbyDocterID(String docterID){
+        return Repo.findByDocterID(docterID);
+    }
+
+    public Shedule getbyCustom(String docterID, LocalDate day, String time){
+            Optional<Shedule> shedule = Repo.findByDocterIDAndDayAndTime(docterID,day,time);
+            return shedule.orElse(null);
     }
 }
 
