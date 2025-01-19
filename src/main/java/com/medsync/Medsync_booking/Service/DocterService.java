@@ -15,7 +15,13 @@ public class DocterService {
     DocterRepository Repo;
 
     public Docter creatDocter(Docter docter){
-        return Repo.save(docter);
+        if (Repo.existsById(docter.getDocterID())) {
+            return null;
+            
+        }else{
+            return Repo.save(docter);
+        }
+        
     }
 
     public Docter getDocterById(String id){
