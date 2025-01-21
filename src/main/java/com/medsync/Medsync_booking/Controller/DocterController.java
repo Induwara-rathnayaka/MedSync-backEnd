@@ -26,8 +26,8 @@ public class DocterController {
     DocterService docterService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<Docter> createDopcter(@RequestBody Docter docter) {
-        Docter createdocter = docterService.creatDocter(docter);
+    public ResponseEntity<String> createDopcter(@RequestBody Docter docter) {
+        String createdocter = docterService.creatDocter(docter);
         return ResponseEntity.ok(createdocter);
     }
     
@@ -66,4 +66,11 @@ public class DocterController {
         List<Docter> docters = docterService.fingBySpecialty(specialty);
         return ResponseEntity.ok(docters);
     }
+
+    @GetMapping("/search/{email}/{password}")
+    public ResponseEntity<String> searchDocters(@PathVariable String email, @PathVariable String password){
+        String docters = docterService.findByEmailAndPassword(email, password);
+        return ResponseEntity.ok(docters);
+    }
+    
 }

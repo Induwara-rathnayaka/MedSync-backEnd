@@ -14,12 +14,13 @@ public class DocterService {
     @Autowired
     DocterRepository Repo;
 
-    public Docter creatDocter(Docter docter){
+    public String creatDocter(Docter docter){
         if (Repo.existsById(docter.getDocterID())) {
-            return null;
+            return "Alredy docter in this ID";
             
         }else{
-            return Repo.save(docter);
+            Repo.save(docter);
+            return "docter Registration sucsessfull";
         }
         
     }
@@ -51,6 +52,15 @@ public class DocterService {
 
     public List<Docter> fingBySpecialty(String specialty){
         return Repo.findBySpecialty(specialty);
+    }
+
+    public String findByEmailAndPassword(String email , String password){
+        Optional<Docter> searchDocter = Repo.findByEmailAndPassword(email,password);
+        if (searchDocter.isPresent()) {
+            return "Login Sucsessfull";
+        }else{
+            return "Docter not found";
+        }
     }
 
 }
