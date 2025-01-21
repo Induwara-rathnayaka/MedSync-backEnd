@@ -20,6 +20,7 @@ public class Docter {
     private String docterID;
     private String name;
     private String contactNumber;
+    private String email;
     private String specialty;
     private String password;
 

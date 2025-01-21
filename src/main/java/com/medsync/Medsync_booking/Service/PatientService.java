@@ -15,15 +15,16 @@ public class PatientService {
     @Autowired
     PatientRepositery Repo;
 
-    public Patient creatPatient(Patient patient){
+    public String creatPatient(Patient patient){
 
         Optional<Patient> searchPatient = Repo.findByEmail(patient.getEmail());
 
         //save user unique email 
         if(searchPatient.isPresent()){
-           return null;
+           return "Alredy use this email";
         }else{
-            return Repo.save(patient);
+            Repo.save(patient);
+            return "Registration sucsessfull";
         }  
     }
 
@@ -55,5 +56,16 @@ public class PatientService {
     public Patient FindByEmail(String email) {
         Optional<Patient> patient = Repo.findByEmail(email);
         return patient.orElse(null);
+    }
+
+    public String loging(String email, String password){
+        Optional<Patient> paitent = Repo.findByEmailAndPassword(email, password);
+
+        if (paitent.isPresent()) {
+            return "Login Sucsessfull";
+
+        }else{
+            return "Patient not found";
+        }
     }
 }
