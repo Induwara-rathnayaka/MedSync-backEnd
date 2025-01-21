@@ -25,8 +25,8 @@ public class PatientController {
     PatientService patientService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-        Patient createPatient = patientService.creatPatient(patient);
+    public ResponseEntity<String> createPatient(@RequestBody Patient patient) {
+        String createPatient = patientService.creatPatient(patient);
         return ResponseEntity.ok(createPatient);
     }
     
@@ -45,8 +45,8 @@ public class PatientController {
     }
 
     @PutMapping({"/upload/{id}"})
-    public ResponseEntity<Patient> updatePatient(@PathVariable String id, @RequestBody Patient docter) {
-        Patient upPatienn = patientService.updatePatient(id, docter);        
+    public ResponseEntity<Patient> updatePatient(@PathVariable String id, @RequestBody Patient patient) {
+        Patient upPatienn = patientService.updatePatient(id, patient);        
         return upPatienn != null 
         ? ResponseEntity.ok(upPatienn) 
         : ResponseEntity.notFound().build();
@@ -66,5 +66,11 @@ public class PatientController {
         return patient != null 
         ? ResponseEntity.ok(patient) 
         : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/loging/{email}/{password}")
+    public ResponseEntity<String> patientLoging(@PathVariable String email , String password){
+        String status = patientService.loging(email, password);
+        return ResponseEntity.ok(status);
     }
  }
