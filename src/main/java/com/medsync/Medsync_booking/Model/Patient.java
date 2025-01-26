@@ -18,10 +18,10 @@ public class Patient {
 
     @Id 
     private String id;
-    private String NIC;
+    private String nic;
     private String name;
-    private String ContactNo;
+    private String contactNo;
     private String email;
-    private String Password;
+    private String password;
         
 }
