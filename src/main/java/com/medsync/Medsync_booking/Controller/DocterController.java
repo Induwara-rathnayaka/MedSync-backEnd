@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
+@Validated
 @RequestMapping({"Docter"})
 public class DocterController {
 
@@ -26,7 +30,7 @@ public class DocterController {
     DocterService docterService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<String> createDopcter(@RequestBody Docter docter) {
+    public ResponseEntity<String> createDopcter(@RequestBody @Valid Docter docter) {
         String createdocter = docterService.creatDocter(docter);
         return ResponseEntity.ok(createdocter);
     }
@@ -67,7 +71,7 @@ public class DocterController {
         return ResponseEntity.ok(docters);
     }
 
-    @GetMapping("/search/{email}/{password}")
+    @PostMapping("/Login/{email}/{password}")
     public ResponseEntity<String> searchDocters(@PathVariable String email, @PathVariable String password){
         String docters = docterService.findByEmailAndPassword(email, password);
         return ResponseEntity.ok(docters);
