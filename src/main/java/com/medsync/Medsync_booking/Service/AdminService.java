@@ -44,4 +44,15 @@ public class AdminService {
         }
         return "Admin not found";
     }
+
+    public String loging(String adminId, String password){
+        Optional<Admin> admin = Repo.findByEmailAndPassword(adminId, password);
+
+        if (admin.isPresent()) {
+            return "Login Sucsessfull";
+
+        }else{
+            return "Admin not found";
+        }
+    }
 }

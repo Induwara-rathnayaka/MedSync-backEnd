@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medsync.Medsync_booking.Model.Admin;
 import com.medsync.Medsync_booking.Service.AdminService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
+@Validated
 @RequestMapping({"Admin"})
 public class AdminContraller {
     @Autowired
     AdminService adminService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> createAdmin(@RequestBody @Valid Admin admin) {
         Admin createAdmin = adminService.creatAdmin(admin);
         return ResponseEntity.ok(createAdmin);
     }
@@ -57,6 +61,12 @@ public class AdminContraller {
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/Login/{adminId}/{password}")
+    public ResponseEntity<String> searchDocters(@PathVariable String adminId, @PathVariable String password){
+        String docters = adminService.loging(adminId, password);
+        return ResponseEntity.ok(docters);
     }
 
 }
