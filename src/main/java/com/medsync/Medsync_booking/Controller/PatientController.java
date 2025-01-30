@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medsync.Medsync_booking.Model.Patient;
 import com.medsync.Medsync_booking.Service.PatientService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
+@Validated
 @RequestMapping("patient")
 public class PatientController {
     
@@ -25,7 +29,7 @@ public class PatientController {
     PatientService patientService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<String> createPatient(@RequestBody Patient patient) {
+    public ResponseEntity<String> createPatient(@RequestBody @Valid Patient patient) {
         String createPatient = patientService.creatPatient(patient);
         return ResponseEntity.ok(createPatient);
     }
@@ -68,7 +72,7 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/loging/{email}/{password}")
+    @PostMapping("/loging/{email}/{password}")
     public ResponseEntity<String> patientLoging(@PathVariable String email , String password){
         String status = patientService.loging(email, password);
         return ResponseEntity.ok(status);
