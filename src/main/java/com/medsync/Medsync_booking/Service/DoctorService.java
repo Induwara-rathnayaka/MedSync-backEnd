@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medsync.Medsync_booking.Model.Docter;
-import com.medsync.Medsync_booking.Repository.DocterRepository;
+import com.medsync.Medsync_booking.Model.Doctor;
+import com.medsync.Medsync_booking.Repository.DoctorRepository;
 
 @Service
-public class DocterService {
+public class DoctorService {
     @Autowired
-    DocterRepository Repo;
+    DoctorRepository Repo;
 
-    public String creatDocter(Docter docter){
+    public String creatDocter(Doctor docter){
         if (Repo.existsById(docter.getDocterID())) {
             return "Alredy docter in this ID";
             
@@ -25,16 +25,16 @@ public class DocterService {
         
     }
 
-    public Docter getDocterById(String id){
-        Optional<Docter> docter = Repo.findById(id); 
+    public Doctor getDocterById(String id){
+        Optional<Doctor> docter = Repo.findById(id); 
         return docter.orElse(null);
     }
 
-    public  List<Docter> getAllDocter(){
+    public  List<Doctor> getAllDocter(){
         return Repo.findAll();
     }
 
-    public Docter updateDocter(String id , Docter docter){
+    public Doctor updateDocter(String id , Doctor docter){
         if (Repo.existsById(id)) {
             docter.setDocterID(id);
             return Repo.save(docter);
@@ -50,12 +50,12 @@ public class DocterService {
         return "Docter not found";
     }
 
-    public List<Docter> fingBySpecialty(String specialty){
+    public List<Doctor> fingBySpecialty(String specialty){
         return Repo.findBySpecialty(specialty);
     }
 
     public String findByEmailAndPassword(String email , String password){
-        Optional<Docter> searchDocter = Repo.findByEmailAndPassword(email,password);
+        Optional<Doctor> searchDocter = Repo.findByEmailAndPassword(email,password);
         if (searchDocter.isPresent()) {
             return "Login Sucsessfull";
         }else{

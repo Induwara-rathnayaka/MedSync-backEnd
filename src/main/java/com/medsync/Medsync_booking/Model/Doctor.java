@@ -15,8 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document(collection = "Docter")
-public class Docter {
+@Document(collection = "Doctor")
+public class Doctor {
 
     @Id
     private String docterID;

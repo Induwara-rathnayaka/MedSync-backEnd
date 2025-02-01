@@ -8,8 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medsync.Medsync_booking.Model.Docter;
-import com.medsync.Medsync_booking.Service.DocterService;
+import com.medsync.Medsync_booking.Model.Doctor;
+import com.medsync.Medsync_booking.Service.DoctorService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,35 +23,35 @@ import jakarta.validation.Valid;
 
 @RestController
 @Validated
-@RequestMapping({"Docter"})
-public class DocterController {
+@RequestMapping({"Doctor"})
+public class DoctorController {
 
     @Autowired
-    DocterService docterService;
+    DoctorService docterService;
 
     @PostMapping({"/create"})
-    public ResponseEntity<String> createDopcter(@RequestBody @Valid Docter docter) {
+    public ResponseEntity<String> createDopcter(@RequestBody @Valid Doctor docter) {
         String createdocter = docterService.creatDocter(docter);
         return ResponseEntity.ok(createdocter);
     }
     
     @GetMapping({"/getById/{id}"})
-    public ResponseEntity<Docter> getDocterByID(@PathVariable String id) {
-        Docter getDocter = docterService.getDocterById(id);
+    public ResponseEntity<Doctor> getDocterByID(@PathVariable String id) {
+        Doctor getDocter = docterService.getDocterById(id);
         return getDocter != null 
         ? ResponseEntity.ok(getDocter) 
         : ResponseEntity.notFound().build();
     }
 
     @GetMapping({"/getAll"})
-    public ResponseEntity<List<Docter>> getAllDocter() {
-        List<Docter> docters = docterService.getAllDocter();
+    public ResponseEntity<List<Doctor>> getAllDocter() {
+        List<Doctor> docters = docterService.getAllDocter();
         return ResponseEntity.ok(docters);
     }
 
     @PutMapping({"/update/{id}"})
-    public ResponseEntity<Docter> updateDocter(@PathVariable String id, @RequestBody Docter docter) {
-        Docter upDocter = docterService.updateDocter(id, docter);        
+    public ResponseEntity<Doctor> updateDocter(@PathVariable String id, @RequestBody Doctor docter) {
+        Doctor upDocter = docterService.updateDocter(id, docter);        
         return upDocter != null 
         ? ResponseEntity.ok(upDocter) 
         : ResponseEntity.notFound().build();
@@ -66,8 +66,8 @@ public class DocterController {
     }
 
     @GetMapping("/getByspecialty/{specialty}")
-    public ResponseEntity<List<Docter>> getDocterBySpecialty(@PathVariable String specialty){
-        List<Docter> docters = docterService.fingBySpecialty(specialty);
+    public ResponseEntity<List<Doctor>> getDocterBySpecialty(@PathVariable String specialty){
+        List<Doctor> docters = docterService.fingBySpecialty(specialty);
         return ResponseEntity.ok(docters);
     }
 
