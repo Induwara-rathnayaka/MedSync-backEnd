@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Doctor {
 
     @Id
-    private String docterID;
+    private String doctorID;
     private String name;
     private String contactNumber;
 

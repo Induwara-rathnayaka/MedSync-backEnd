@@ -24,16 +24,20 @@ import jakarta.validation.Valid;
 @Validated
 @RequestMapping("patient")
 public class PatientController {
+
+    //After Add JWt not use this Apis
     
     @Autowired
     PatientService patientService;
 
+    //create paitent 
     @PostMapping({"/create"})
     public ResponseEntity<String> createPatient(@RequestBody @Valid Patient patient) {
         String createPatient = patientService.creatPatient(patient);
         return ResponseEntity.ok(createPatient);
     }
-    
+
+    //get paitent by id
     @GetMapping({"/getById/{id}"})
     public ResponseEntity<Patient> getPatientByID(@PathVariable String id) {
         Patient getPatient = patientService.getPatientById(id);
@@ -42,12 +46,14 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
+    //get All paitent
     @GetMapping({"/getAll"})
     public ResponseEntity<List<Patient>> getAllPatient() {
         List<Patient> patients = patientService.getAllPatient();
         return ResponseEntity.ok(patients);
     }
 
+    //update paitent by id
     @PutMapping({"/upload/{id}"})
     public ResponseEntity<Patient> updatePatient(@PathVariable String id, @RequestBody Patient patient) {
         Patient upPatienn = patientService.updatePatient(id, patient);        
@@ -56,6 +62,7 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
+    //delete paitent by id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable String id) {
         String result = patientService.deletePatient(id);
@@ -64,6 +71,7 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
+    //get paitent by their email
     @GetMapping("/getByEmail/{email}")
     public ResponseEntity<Patient> getByEmail(@PathVariable String email){
         Patient patient = patientService.FindByEmail(email);
@@ -72,6 +80,7 @@ public class PatientController {
         : ResponseEntity.notFound().build();
     }
 
+    //paitent loging
     @PostMapping("/loging/{email}/{password}")
     public ResponseEntity<String> patientLoging(@PathVariable String email , String password){
         String status = patientService.loging(email, password);

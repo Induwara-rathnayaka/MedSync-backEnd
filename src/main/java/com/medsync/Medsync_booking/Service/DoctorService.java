@@ -15,7 +15,7 @@ public class DoctorService {
     DoctorRepository Repo;
 
     public String creatDocter(Doctor docter){
-        if (Repo.existsById(docter.getDocterID())) {
+        if (Repo.existsById(docter.getDoctorID())) {
             return "Alredy docter in this ID";
             
         }else{
@@ -36,7 +36,7 @@ public class DoctorService {
 
     public Doctor updateDocter(String id , Doctor docter){
         if (Repo.existsById(id)) {
-            docter.setDocterID(id);
+            docter.setDoctorID(id);
             return Repo.save(docter);
         }
         return null;

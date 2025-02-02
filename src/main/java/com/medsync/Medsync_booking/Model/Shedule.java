@@ -13,12 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Document(collection = "Docter_Shedule")
+@Document(collection = "Doctor_Shedule")
 public class Shedule {
     
     @Id
     private String ID;
-    private String docterID;
+    private String doctorID;
     private String day;
     private String time;
     

@@ -20,7 +20,7 @@ public class Booking {
     @Id
     private String id;
     private String PatientID;
-    private String DocterID;
+    private String DoctorID;
     private String paymentMethod;
     private LocalDate day;
     private String time;

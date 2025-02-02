@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface SheduleRepository extends MongoRepository<Shedule , String> {
     
-    List<Shedule> findByDocterID(String docterID);
+    List<Shedule> findByDoctorID(String doctorID);
 
-    @Query("{ 'docterID' : ?0 , 'day' : ?1 , 'time' : ?2 }")
-    Optional<Shedule> findByDocterIDAndDayAndTime(String docterID, String day, String time);
+    @Query("{ 'doctorID' : ?0 , 'day' : ?1 , 'time' : ?2 }")
+    Optional<Shedule>  findByDoctorIDAndDayAndTime(String doctorID, String day, String time);
 
 }
