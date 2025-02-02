@@ -29,12 +29,14 @@ public class DoctorController {
     @Autowired
     DoctorService docterService;
 
+    //create doctor
     @PostMapping({"/create"})
     public ResponseEntity<String> createDopcter(@RequestBody @Valid Doctor docter) {
         String createdocter = docterService.creatDocter(docter);
         return ResponseEntity.ok(createdocter);
     }
     
+    //get doctor by doctor id
     @GetMapping({"/getById/{id}"})
     public ResponseEntity<Doctor> getDocterByID(@PathVariable String id) {
         Doctor getDocter = docterService.getDocterById(id);
@@ -43,6 +45,7 @@ public class DoctorController {
         : ResponseEntity.notFound().build();
     }
 
+    //get All register Doctors
     @GetMapping({"/getAll"})
     public ResponseEntity<List<Doctor>> getAllDocter() {
         List<Doctor> docters = docterService.getAllDocter();
@@ -57,6 +60,7 @@ public class DoctorController {
         : ResponseEntity.notFound().build();
     }
 
+    //delete doctor by doctor id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDocter(@PathVariable String id) {
         String result = docterService.deleteDocter(id);
@@ -65,12 +69,14 @@ public class DoctorController {
         : ResponseEntity.notFound().build();
     }
 
+    //get Doctors by their specility
     @GetMapping("/getByspecialty/{specialty}")
     public ResponseEntity<List<Doctor>> getDocterBySpecialty(@PathVariable String specialty){
         List<Doctor> docters = docterService.fingBySpecialty(specialty);
         return ResponseEntity.ok(docters);
     }
 
+    //docter Loging (return string )
     @PostMapping("/Login/{email}/{password}")
     public ResponseEntity<String> searchDocters(@PathVariable String email, @PathVariable String password){
         String docters = docterService.findByEmailAndPassword(email, password);

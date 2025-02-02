@@ -23,12 +23,14 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    //create bookinbg
     @PostMapping({"/create"})
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
         Booking createBooking = bookingService.creatBooking(booking);
         return ResponseEntity.ok(createBooking);
     }
     
+    //get booking by id
     @GetMapping({"/getById/{id}"})
     public ResponseEntity<Booking> getBookingByID(@PathVariable String id) {
         Booking getBooking = bookingService.getBookingById(id);
@@ -37,12 +39,14 @@ public class BookingController {
         : ResponseEntity.notFound().build();
     }
 
+    //get all booking
     @GetMapping({"/getAll"})
     public ResponseEntity<List<Booking>> getAllBooking() {
         List<Booking> booking = bookingService.getAllBooking();
         return ResponseEntity.ok(booking);
     }
 
+    //update booking
     @PutMapping({"/update/{id}"})
     public ResponseEntity<Booking> updateBooking(@PathVariable String id, @RequestBody Booking booking) {
         Booking upBooking = bookingService.updateBooking(id, booking);        
@@ -51,6 +55,7 @@ public class BookingController {
         : ResponseEntity.notFound().build();
     }
 
+    //delete booking
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBooking(@PathVariable String id) {
         String result = bookingService.deleteBooking(id);

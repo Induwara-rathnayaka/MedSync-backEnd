@@ -23,12 +23,14 @@ public class SheduleController {
     @Autowired
     SheduleService sheduleService;
 
+    //create shedule
     @PostMapping({"/create"})
     public ResponseEntity<Shedule> createShedule(@RequestBody Shedule shedule) {
         Shedule createShedule = sheduleService.creatShedule(shedule);
         return ResponseEntity.ok(createShedule);
     }
     
+    //getshedule by id
     @GetMapping({"/getByID/{id}"})
     public ResponseEntity<Shedule> getSheduleByID(@PathVariable String id) {
         Shedule getShedule = sheduleService.getSheduleById(id);
@@ -37,12 +39,14 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
+    //get All shedules
     @GetMapping({"/getAll"})
     public ResponseEntity<List<Shedule>> getAllShedule() {
         List<Shedule> Sheduless = sheduleService.getAllShedule();
         return ResponseEntity.ok(Sheduless);
     }
 
+    //update shedule by id
     @PutMapping({"/update/{id}"})
     public ResponseEntity<Shedule> updateShedule(@PathVariable String id, @RequestBody Shedule shedule) {
         Shedule upShedule = sheduleService.updateShedule(id, shedule);        
@@ -51,6 +55,7 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
+    //delete shedule by id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteShedule(@PathVariable String id) {
         String result = sheduleService.deleteShedule(id);
@@ -59,15 +64,17 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/getByDocterID/{docterID}")
-    public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String docterID){
-        List<Shedule> shedules = sheduleService.getbyDocterID(docterID);
+    //get shedule by docter iD
+    @GetMapping("/getByDoctorID/{doctorID}")
+    public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String doctorID){
+        List<Shedule> shedules = sheduleService.getbyDocterID(doctorID);
         return ResponseEntity.ok(shedules);
     }
 
-    @GetMapping("/getByCustom/{docterID}/{day}/{time}")
-    public ResponseEntity<Shedule> getSheduleByCustom(@PathVariable String docterID , @PathVariable String day , @PathVariable String time ){
-        Shedule result = sheduleService.getbyCustom(docterID,day,time);
+    //get shedule by docter id  , day and time
+    @GetMapping("/getByCustom/{doctorID}/{day}/{time}")
+    public ResponseEntity<Shedule> getSheduleByCustom(@PathVariable String doctorID , @PathVariable String day , @PathVariable String time ){
+        Shedule result = sheduleService.getbyCustom(doctorID,day,time);
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();

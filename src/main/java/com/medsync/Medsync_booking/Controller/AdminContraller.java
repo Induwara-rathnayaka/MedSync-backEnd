@@ -27,12 +27,14 @@ public class AdminContraller {
     @Autowired
     AdminService adminService;
 
+    //create admin 
     @PostMapping({"/create"})
     public ResponseEntity<Admin> createAdmin(@RequestBody @Valid Admin admin) {
         Admin createAdmin = adminService.creatAdmin(admin);
         return ResponseEntity.ok(createAdmin);
     }
     
+    //get Admin by id
     @GetMapping({"/getById/{id}"})
     public ResponseEntity<Admin> getAdminByID(@PathVariable String id) {
         Admin getAdmin = adminService.getAdminById(id);
@@ -41,12 +43,14 @@ public class AdminContraller {
         : ResponseEntity.notFound().build();
     }
 
+    //get all Admins
     @GetMapping({"/getAll"})
     public ResponseEntity<List<Admin>> getAllAdmin() {
         List<Admin> booking = adminService.getAllAdmin();
         return ResponseEntity.ok(booking);
     }
 
+    //Update Admin
     @PutMapping({"/update/{id}"})
     public ResponseEntity<Admin> updateAdmin(@PathVariable String id, @RequestBody Admin admin) {
         Admin upAdmin = adminService.updateAdmin(id, admin);   
@@ -55,6 +59,7 @@ public class AdminContraller {
         : ResponseEntity.notFound().build();
     }
 
+    //delete Admin
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAdmin(@PathVariable String id) {
         String result = adminService.deleteAdmin(id);
@@ -63,6 +68,7 @@ public class AdminContraller {
         : ResponseEntity.notFound().build();
     }
 
+    //admin get by id And password
     @PostMapping("/Login/{adminId}/{password}")
     public ResponseEntity<String> searchDocters(@PathVariable String adminId, @PathVariable String password){
         String docters = adminService.loging(adminId, password);

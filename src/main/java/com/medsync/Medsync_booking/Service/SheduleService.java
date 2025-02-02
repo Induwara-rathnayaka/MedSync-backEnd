@@ -16,7 +16,7 @@ public class SheduleService {
     SheduleRepository Repo;
 
     public Shedule creatShedule(Shedule shedule){
-        Optional<Shedule> shOptional = Repo.findByDocterIDAndDayAndTime(shedule.getDocterID(),shedule.getDay(),shedule.getTime());
+        Optional<Shedule> shOptional = Repo.findByDoctorIDAndDayAndTime(shedule.getDoctorID(),shedule.getDay(),shedule.getTime());
         if(shOptional.isPresent()){
             return null;
         }else{
@@ -50,11 +50,11 @@ public class SheduleService {
     }
 
     public List<Shedule> getbyDocterID(String docterID){
-        return Repo.findByDocterID(docterID);
+        return Repo.findByDoctorID(docterID);
     }
 
-    public Shedule getbyCustom(String docterID, String day, String time){
-            Optional<Shedule> shedule = Repo.findByDocterIDAndDayAndTime(docterID,day,time);
+    public Shedule getbyCustom(String doctorID, String day, String time){
+            Optional<Shedule> shedule = Repo.findByDoctorIDAndDayAndTime(doctorID,day,time);
             return shedule.orElse(null);
     }
 }
