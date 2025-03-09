@@ -1,5 +1,6 @@
 package com.medsync.Medsync_booking.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,15 +66,15 @@ public class SheduleController {
     }
 
     //get shedule by docter iD
-    @GetMapping("/getByDoctorID/{doctorID}")
-    public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String doctorID){
-        List<Shedule> shedules = sheduleService.getbyDocterID(doctorID);
+    @GetMapping("/getByDoctorName/{doctorName}")
+    public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String doctorName){
+        List<Shedule> shedules = sheduleService.getbyDocterID(doctorName);
         return ResponseEntity.ok(shedules);
     }
 
     //get shedule by docter id  , day and time
     @GetMapping("/getByCustom/{doctorID}/{day}/{time}")
-    public ResponseEntity<Shedule> getSheduleByCustom(@PathVariable String doctorID , @PathVariable String day , @PathVariable String time ){
+    public ResponseEntity<Shedule> getSheduleByCustom(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
         Shedule result = sheduleService.getbyCustom(doctorID,day,time);
         return result != null 
         ? ResponseEntity.ok(result) 

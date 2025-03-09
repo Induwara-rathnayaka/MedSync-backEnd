@@ -1,5 +1,6 @@
 package com.medsync.Medsync_booking.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,10 +51,10 @@ public class SheduleService {
     }
 
     public List<Shedule> getbyDocterID(String docterID){
-        return Repo.findByDoctorID(docterID);
+        return Repo.findByDoctorName(docterID);
     }
 
-    public Shedule getbyCustom(String doctorID, String day, String time){
+    public Shedule getbyCustom(String doctorID, LocalDate day, String time){
             Optional<Shedule> shedule = Repo.findByDoctorIDAndDayAndTime(doctorID,day,time);
             return shedule.orElse(null);
     }
