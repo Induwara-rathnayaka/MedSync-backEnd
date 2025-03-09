@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.medsync.Medsync_booking.Model.Patient;
@@ -11,6 +12,9 @@ import com.medsync.Medsync_booking.Repository.PatientRepositery;
 
 @Service
 public class PatientService {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     PatientRepositery Repo;
@@ -23,7 +27,9 @@ public class PatientService {
         if(searchPatient.isPresent()){
            return "Alredy use this email";
         }else{
-            Repo.save(patient);
+            Patient newAdd = patient;
+            newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
+            Repo.save(newAdd);
             return "Registration sucsessfull";
         }  
     }
@@ -40,7 +46,10 @@ public class PatientService {
     public Patient updatePatient(String id , Patient patient){
         if (Repo.existsById(id)) {
             patient.setNIC(id);
-            return Repo.save(patient);
+            Patient newAdd = patient;
+            newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
+            
+            return Repo.save(newAdd);
         }
         return null;
     }
@@ -59,13 +68,28 @@ public class PatientService {
     }
 
     public String loging(String email, String password){
-        Optional<Patient> paitent = Repo.findByEmailAndPassword(email, password);
 
-        if (paitent.isPresent()) {
-            return "Login Sucsessfull";
 
-        }else{
+        if (Repo.findByEmail(email).isPresent()) {
+
+            Optional<Patient> check = Repo.findByEmail(email);
+
+            String pas = check.get().getPassword();
+
+            if(passwordEncoder.matches(password, pas)){
+
+                return "Login Sucsessfull";
+
+            }  else{
+
+                return "Password Doesn't match";
+            }
+        }
+
+        else{
+
             return "Patient not found";
+            
         }
     }
 }

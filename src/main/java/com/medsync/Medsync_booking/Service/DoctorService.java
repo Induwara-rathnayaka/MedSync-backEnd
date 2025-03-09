@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.medsync.Medsync_booking.Model.Doctor;
@@ -11,6 +12,10 @@ import com.medsync.Medsync_booking.Repository.DoctorRepository;
 
 @Service
 public class DoctorService {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Autowired
     DoctorRepository Repo;
 
@@ -19,7 +24,9 @@ public class DoctorService {
             return "Alredy docter in this ID";
             
         }else{
-            Repo.save(docter);
+            Doctor newAdd = docter;
+            newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
+            Repo.save(newAdd);
             return "docter Registration sucsessfull";
         }
         
@@ -37,7 +44,9 @@ public class DoctorService {
     public Doctor updateDocter(String id , Doctor docter){
         if (Repo.existsById(id)) {
             docter.setDoctorID(id);
-            return Repo.save(docter);
+            Doctor newAdd = docter;
+            newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
+            Repo.save(newAdd);
         }
         return null;
     }
@@ -54,12 +63,28 @@ public class DoctorService {
         return Repo.findBySpecialty(specialty);
     }
 
-    public String findByEmailAndPassword(String email , String password){
-        Optional<Doctor> searchDocter = Repo.findByEmailAndPassword(email,password);
-        if (searchDocter.isPresent()) {
-            return "Login Sucsessfull";
-        }else{
-            return "Docter not found";
+    public String findByEmailAndPassword(String doctorID , String password){
+
+        if (Repo.existsById(doctorID)) {
+
+            Optional<Doctor> check = Repo.findById(doctorID);
+
+            String pas = check.get().getPassword();
+
+            if(passwordEncoder.matches(password, pas)){
+
+                return "Login Sucsessfull";
+
+            }  else{
+
+                return "Password Doesn't match";
+            }
+        }
+
+        else{
+
+            return "Doctor not found";
+            
         }
     }
 
