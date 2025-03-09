@@ -1,5 +1,7 @@
 package com.medsync.Medsync_booking.Model;
 
+import java.time.LocalDate;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +21,9 @@ public class Shedule {
     @Id
     private String ID;
     private String doctorID;
-    private String day;
+    private String doctorName;
+    private LocalDate day;
     private String time;
+    private int Count;
     
 }
