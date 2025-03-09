@@ -63,7 +63,7 @@ public class DoctorService {
         return Repo.findBySpecialty(specialty);
     }
 
-    public String findByEmailAndPassword(String doctorID , String password){
+    public String loging(String doctorID , String password){
 
         if (Repo.existsById(doctorID)) {
 
