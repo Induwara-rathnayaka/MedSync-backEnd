@@ -77,9 +77,9 @@ public class DoctorController {
     }
 
     //docter Loging (return string )
-    @PostMapping("/Login/{email}/{password}")
-    public ResponseEntity<String> searchDocters(@PathVariable String email, @PathVariable String password){
-        String docters = docterService.findByEmailAndPassword(email, password);
+    @PostMapping("/Login/{doctorID}/{password}")
+    public ResponseEntity<String> searchDocters(@PathVariable String doctorID, @PathVariable String password){
+        String docters = docterService.findByEmailAndPassword(doctorID, password);
         return ResponseEntity.ok(docters);
     }
     
