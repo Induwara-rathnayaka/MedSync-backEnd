@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @Validated
-@RequestMapping("patient")
+@RequestMapping({"patient"})
 public class PatientController {
 
     //After Add JWt not use this Apis
@@ -82,7 +82,7 @@ public class PatientController {
 
     //paitent loging
     @PostMapping("/loging/{email}/{password}")
-    public ResponseEntity<String> patientLoging(@PathVariable String email , String password){
+    public ResponseEntity<String> patientLoging(@PathVariable String email ,@PathVariable String password){
         String status = patientService.loging(email, password);
         return ResponseEntity.ok(status);
     }
