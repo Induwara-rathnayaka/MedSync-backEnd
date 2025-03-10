@@ -58,5 +58,27 @@ public class SheduleService {
             Optional<Shedule> shedule = Repo.findByDoctorIDAndDayAndTime(doctorID,day,time);
             return shedule.orElse(null);
     }
+
+    public String request(String doctorID, LocalDate day, String time){
+
+        Optional<Shedule> shedule = Repo.findByDoctorIDAndDayAndTime(doctorID,day,time);
+
+        if(shedule.get().getCount()>0){
+            Shedule upshedule = null;
+
+            upshedule.setCount(shedule.get().getCount()-1);
+            upshedule.setDoctorID(doctorID);
+            upshedule.setDay(day);
+            upshedule.setDoctorName(shedule.get().getDoctorName());
+            upshedule.setTime(time);
+
+            Repo.save(upshedule);
+
+            return "shedule Update";
+            
+        }else{
+            return "Error";
+        }
+    }
 }
 
