@@ -80,4 +80,12 @@ public class SheduleController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/updateShedule/{doctorID}/{day}/{time}")
+    public ResponseEntity<String> updateshedule(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
+        String result = sheduleService.request(doctorID,day,time);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
 }
