@@ -19,9 +19,9 @@ import lombok.Setter;
 public class Booking {
     @Id
     private String id;
-    private String PatientID;
-    private String DoctorID;
-    private String paymentMethod;
+    private String PatientEmail;
+    private String Doctorname;
     private LocalDate day;
     private String time;
+    
 }
