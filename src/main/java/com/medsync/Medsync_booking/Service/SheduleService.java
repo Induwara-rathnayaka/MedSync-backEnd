@@ -71,7 +71,6 @@ public class SheduleService {
                 return "Booking Successfull";
             } else {
                 return "No available slots";
-
             }
         } else {
             return "Schedule not found";
