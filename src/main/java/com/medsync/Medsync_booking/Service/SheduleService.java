@@ -70,11 +70,13 @@ public class SheduleService {
                 Repo.save(shedule); // Save the updated schedule
                 return "Booking Successfull";
             } else {
-                return "No available Appointment";
+                return "No available slots";
+
             }
         } else {
             return "Schedule not found";
         }
     }
 }
+    
 
