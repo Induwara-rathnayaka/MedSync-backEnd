@@ -69,9 +69,9 @@ public class SheduleService {
                 shedule.setCount(shedule.getCount() - 1); // Decrease count
                 Repo.save(shedule); // Save the updated schedule
     
-                return "Schedule Updated";
+                return "Booking Successfull";
             } else {
-                return "No available slots";
+                return "No available Appointment";
             }
         } else {
             return "Schedule not found";
