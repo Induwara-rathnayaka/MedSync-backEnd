@@ -59,26 +59,24 @@ public class SheduleService {
             return shedule.orElse(null);
     }
 
-    public String request(String doctorID, LocalDate day, String time){
-
-        Optional<Shedule> shedule = Repo.findByDoctorIDAndDayAndTime(doctorID,day,time);
-
-        if(shedule.get().getCount()>0){
-            Shedule upshedule = null;
-
-            upshedule.setCount(shedule.get().getCount()-1);
-            upshedule.setDoctorID(doctorID);
-            upshedule.setDay(day);
-            upshedule.setDoctorName(shedule.get().getDoctorName());
-            upshedule.setTime(time);
-
-            Repo.save(upshedule);
-
-            return "shedule Update";
-            
-        }else{
-            return "Error";
+    public String request(String doctorID, LocalDate day, String time) {
+        Optional<Shedule> optionalShedule = Repo.findByDoctorIDAndDayAndTime(doctorID, day, time);
+    
+        if (optionalShedule.isPresent()) {
+            Shedule shedule = optionalShedule.get();
+    
+            if (shedule.getCount() > 0) {
+                shedule.setCount(shedule.getCount() - 1); // Decrease count
+                Repo.save(shedule); // Save the updated schedule
+    
+                return "Schedule Updated";
+            } else {
+                return "No available slots";
+            }
+        } else {
+            return "Schedule not found";
         }
     }
 }
+    
 
