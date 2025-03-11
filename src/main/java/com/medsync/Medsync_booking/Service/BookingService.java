@@ -1,5 +1,6 @@
 package com.medsync.Medsync_booking.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,19 +10,26 @@ import org.springframework.stereotype.Service;
 import com.medsync.Medsync_booking.Model.Booking;
 import com.medsync.Medsync_booking.Repository.BookingRepository;
 
-
 @Service
 public class BookingService {
+
     @Autowired
     BookingRepository Repo;
 
-    public Booking creatBooking(Booking booking){
-        return Repo.save(booking);
+    public String createBooking(Booking booking){
+        Booking Booked = Repo.findByPatientEmailAndDoctorNameAndDayAndTime(booking.getPatientEmail(),booking.getDoctorName(),booking.getDay(),booking.getTime());
+        if (Booked == null) {
+            Repo.save(booking);
+            return "Booking Succsessfull";
+            
+        }else{
+            return "Altery Booked";
+        }
     }
 
     public Booking getBookingById(String id){
-        Optional<Booking> booking = Repo.findById(id); 
-        return booking.orElse(null);
+        Optional<Booking> docter = Repo.findById(id); 
+        return docter.orElse(null);
     }
 
     public  List<Booking> getAllBooking(){
@@ -30,7 +38,7 @@ public class BookingService {
 
     public Booking updateBooking(String id , Booking booking){
         if (Repo.existsById(id)) {
-            booking.setId(id);
+            booking.setId( id);
             return Repo.save(booking);
         }
         return null;
@@ -41,6 +49,22 @@ public class BookingService {
             Repo.deleteById(id);
             return "Delete Suscessfull";
         }
-        return "Booking not found";
+        return "Shedule not found";
+    }
+
+    public List<Booking> getByDocterName(String doctorName){
+        List<Booking> search = Repo.findByDoctorName(doctorName);
+        return search;
+    }
+
+    public List<Booking> getByPatientEmail(String patientEmail){
+        List<Booking> search = Repo.findByPatientEmail(patientEmail);
+        return search;
+    }
+
+    public Booking delete(String patientEmail ,String doctorName , LocalDate day , String time){
+            Booking book = Repo.findByPatientEmailAndDoctorNameAndDayAndTime(patientEmail, doctorName, day, time);
+            Repo.deleteById(book.getId());
+            return book;
     }
 }

@@ -87,5 +87,5 @@ public class SheduleController {
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
-    }
+    }   
 }

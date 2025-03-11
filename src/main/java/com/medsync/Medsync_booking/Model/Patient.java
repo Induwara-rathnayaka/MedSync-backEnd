@@ -1,6 +1,7 @@
 package com.medsync.Medsync_booking.Model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotNull;
@@ -20,11 +21,17 @@ public class Patient {
 
     @Id 
     private String id;
+
+    @Indexed(unique = true)
     private String NIC;
+
     private String name;
+
+    @Indexed(unique = true)
     private String ContactNo;
 
     @NotNull
+    @Indexed(unique = true)
     private String email;
 
     @NotNull
