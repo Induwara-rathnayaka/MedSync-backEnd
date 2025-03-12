@@ -77,6 +77,24 @@ public class SheduleService {
         }
     }
 
+    public String requestUp(String doctorID, LocalDate day, String time) {
+        Optional<Shedule> optionalShedule = Repo.findByDoctorIDAndDayAndTime(doctorID, day, time);
+    
+        if (optionalShedule.isPresent()) {
+            Shedule shedule = optionalShedule.get();
+    
+            if (shedule.getCount() < 10) {
+                shedule.setCount(shedule.getCount() + 1); // Decrease count
+                Repo.save(shedule); // Save the updated schedule
+                return "Cancelled Successfull";
+            } else {
+                return "Maximum Schedule";
+            }
+        } else {
+            return "Schedule not found";
+        }
+    }
+
     public String deleByDoctorId(String doctorID){
         Repo.deleteByDoctorID(doctorID);
         return "Delete Sucsessfull";

@@ -88,6 +88,14 @@ public class SheduleController {
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/incrementShedule/{doctorID}/{day}/{time}")
+    public ResponseEntity<String> incrementShedule(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
+        String result = sheduleService.requestUp(doctorID,day,time);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
     
     @DeleteMapping({"/deleteBydoctorId/{doctorID}"})
     public ResponseEntity<String> deleByDoctorId(@PathVariable String doctorID ){
