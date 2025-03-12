@@ -76,6 +76,11 @@ public class SheduleService {
             return "Schedule not found";
         }
     }
+
+    public String deleByDoctorId(String doctorID){
+        Repo.deleteByDoctorID(doctorID);
+        return "Delete Sucsessfull";
+    }
 }
     
 
