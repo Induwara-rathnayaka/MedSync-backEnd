@@ -65,9 +65,9 @@ public class BookingContraller {
         : ResponseEntity.notFound().build();
     }
 
-    @GetMapping({"/getByDocterName/{doctorName}"})
-    public ResponseEntity<List<Booking>> getByDocterName(@PathVariable String doctorName) {
-        List<Booking> Bookingess = bookingService.getByDocterName(doctorName);
+    @GetMapping({"/getByDocterName/{docterId}"})
+    public ResponseEntity<List<Booking>> getByDocterName(@PathVariable String docterId) {
+        List<Booking> Bookingess = bookingService.getByDocterId(docterId);
         return ResponseEntity.ok(Bookingess);        
     }
 

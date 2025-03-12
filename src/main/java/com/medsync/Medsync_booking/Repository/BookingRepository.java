@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public interface BookingRepository extends MongoRepository<Booking, String>{
 
-    List<Booking> findByDoctorName(String doctorName);
+    List<Booking> findByDocterId(String docterId);
 
     List<Booking> findByPatientEmail(String patientEmail);
 

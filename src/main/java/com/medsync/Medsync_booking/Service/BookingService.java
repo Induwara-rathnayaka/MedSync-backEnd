@@ -52,8 +52,8 @@ public class BookingService {
         return "Shedule not found";
     }
 
-    public List<Booking> getByDocterName(String doctorName){
-        List<Booking> search = Repo.findByDoctorName(doctorName);
+    public List<Booking> getByDocterId(String docterId){
+        List<Booking> search = Repo.findByDocterId(docterId);
         return search;
     }
 
