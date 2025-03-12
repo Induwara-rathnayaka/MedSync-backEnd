@@ -20,4 +20,6 @@ public interface SheduleRepository extends MongoRepository<Shedule , String> {
 
     void deleteByDoctorID(String doctorID);
 
+    List<Shedule> findByDoctorNameAndDayGreaterThanEqual(String doctorName , LocalDate todayDate);
+
 }

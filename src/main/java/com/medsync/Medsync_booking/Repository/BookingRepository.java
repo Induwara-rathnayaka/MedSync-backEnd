@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 public interface BookingRepository extends MongoRepository<Booking, String>{
 
-    List<Booking> findByDocterId(String docterId);
+    List<Booking> findByDocterIdAndDayGreaterThanEqual(String docterId, LocalDate todayDate);
 
-    List<Booking> findByPatientEmail(String patientEmail);
+    List<Booking> findByPatientEmailAndDayGreaterThanEqual(String patientEmail , LocalDate todayDate);
 
     Booking findByPatientEmailAndDoctorNameAndDayAndTime(String patientEmail, String doctorName, LocalDate day, String time);
 

@@ -51,7 +51,8 @@ public class SheduleService {
     }
 
     public List<Shedule> getbyDocterName(String doctorName){
-        return Repo.findByDoctorName(doctorName);
+        LocalDate today = LocalDate.now();
+        return Repo.findByDoctorNameAndDayGreaterThanEqual(doctorName, today);
     }
 
     public Shedule getbyCustom(String doctorID, LocalDate day, String time){

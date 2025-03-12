@@ -53,12 +53,14 @@ public class BookingService {
     }
 
     public List<Booking> getByDocterId(String docterId){
-        List<Booking> search = Repo.findByDocterId(docterId);
+        LocalDate today = LocalDate.now();
+        List<Booking> search = Repo.findByDocterIdAndDayGreaterThanEqual(docterId,today);
         return search;
     }
 
     public List<Booking> getByPatientEmail(String patientEmail){
-        List<Booking> search = Repo.findByPatientEmail(patientEmail);
+        LocalDate today = LocalDate.now();
+        List<Booking> search = Repo.findByPatientEmailAndDayGreaterThanEqual(patientEmail,today);
         return search;
     }
 
