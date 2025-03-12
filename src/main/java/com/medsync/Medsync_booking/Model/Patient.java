@@ -23,7 +23,7 @@ public class Patient {
     private String id;
 
     @Indexed(unique = true)
-    private String NIC;
+    private int age;
 
     private String name;
 
