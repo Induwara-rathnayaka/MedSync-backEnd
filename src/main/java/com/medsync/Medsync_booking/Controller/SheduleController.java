@@ -57,7 +57,7 @@ public class SheduleController {
     }
 
     //delete shedule by id
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping({"/delete/{id}"})
     public ResponseEntity<String> deleteShedule(@PathVariable String id) {
         String result = sheduleService.deleteShedule(id);
         return result != null 
@@ -66,9 +66,9 @@ public class SheduleController {
     }
 
     //get shedule by docter iD
-    @GetMapping("/getByDoctorName/{doctorName}")
+    @GetMapping({"/getByDoctorName/{doctorName}"})
     public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String doctorName){
-        List<Shedule> shedules = sheduleService.getbyDocterID(doctorName);
+        List<Shedule> shedules = sheduleService.getbyDocterName(doctorName);
         return ResponseEntity.ok(shedules);
     }
 
@@ -87,5 +87,21 @@ public class SheduleController {
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();
-    }   
+    }
+
+    @PutMapping("/incrementShedule/{doctorID}/{day}/{time}")
+    public ResponseEntity<String> incrementShedule(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
+        String result = sheduleService.requestUp(doctorID,day,time);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
+    
+    @DeleteMapping({"/deleteBydoctorId/{doctorID}"})
+    public ResponseEntity<String> deleByDoctorId(@PathVariable String doctorID ){
+        String result = sheduleService.deleByDoctorId(doctorID);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
 }

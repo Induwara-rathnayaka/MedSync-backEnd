@@ -50,8 +50,9 @@ public class SheduleService {
         return "Shedule not found";
     }
 
-    public List<Shedule> getbyDocterID(String docterID){
-        return Repo.findByDoctorName(docterID);
+    public List<Shedule> getbyDocterName(String doctorName){
+        LocalDate today = LocalDate.now();
+        return Repo.findByDoctorNameAndDayGreaterThanEqual(doctorName, today);
     }
 
     public Shedule getbyCustom(String doctorID, LocalDate day, String time){
@@ -75,6 +76,29 @@ public class SheduleService {
         } else {
             return "Schedule not found";
         }
+    }
+
+    public String requestUp(String doctorID, LocalDate day, String time) {
+        Optional<Shedule> optionalShedule = Repo.findByDoctorIDAndDayAndTime(doctorID, day, time);
+    
+        if (optionalShedule.isPresent()) {
+            Shedule shedule = optionalShedule.get();
+    
+            if (shedule.getCount() < 10) {
+                shedule.setCount(shedule.getCount() + 1); // Decrease count
+                Repo.save(shedule); // Save the updated schedule
+                return "Cancelled Successfull";
+            } else {
+                return "Maximum Schedule";
+            }
+        } else {
+            return "Schedule not found";
+        }
+    }
+
+    public String deleByDoctorId(String doctorID){
+        Repo.deleteByDoctorID(doctorID);
+        return "Delete Sucsessfull";
     }
 }
     

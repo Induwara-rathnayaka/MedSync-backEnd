@@ -21,6 +21,7 @@ public class Booking {
     private String id;
     private String patientEmail;
     private String doctorName;
+    private String docterId;
     private LocalDate day;
     private String time;
     

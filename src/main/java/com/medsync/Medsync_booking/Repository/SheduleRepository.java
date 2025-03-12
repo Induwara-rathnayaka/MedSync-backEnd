@@ -18,4 +18,8 @@ public interface SheduleRepository extends MongoRepository<Shedule , String> {
     @Query("{ 'doctorID' : ?0 , 'day' : ?1 , 'time' : ?2 }")
     Optional<Shedule>  findByDoctorIDAndDayAndTime(String doctorID, LocalDate day, String time);
 
+    void deleteByDoctorID(String doctorID);
+
+    List<Shedule> findByDoctorNameAndDayGreaterThanEqual(String doctorName , LocalDate todayDate);
+
 }

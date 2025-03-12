@@ -52,13 +52,15 @@ public class BookingService {
         return "Shedule not found";
     }
 
-    public List<Booking> getByDocterName(String doctorName){
-        List<Booking> search = Repo.findByDoctorName(doctorName);
+    public List<Booking> getByDocterId(String docterId){
+        LocalDate today = LocalDate.now();
+        List<Booking> search = Repo.findByDocterIdAndDayGreaterThanEqual(docterId,today);
         return search;
     }
 
     public List<Booking> getByPatientEmail(String patientEmail){
-        List<Booking> search = Repo.findByPatientEmail(patientEmail);
+        LocalDate today = LocalDate.now();
+        List<Booking> search = Repo.findByPatientEmailAndDayGreaterThanEqual(patientEmail,today);
         return search;
     }
 
