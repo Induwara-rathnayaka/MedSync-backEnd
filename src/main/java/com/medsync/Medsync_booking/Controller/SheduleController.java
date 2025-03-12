@@ -68,7 +68,7 @@ public class SheduleController {
     //get shedule by docter iD
     @GetMapping({"/getByDoctorName/{doctorName}"})
     public ResponseEntity<List<Shedule>> getSheduleByDoctrerID(@PathVariable String doctorName){
-        List<Shedule> shedules = sheduleService.getbyDocterID(doctorName);
+        List<Shedule> shedules = sheduleService.getbyDocterName(doctorName);
         return ResponseEntity.ok(shedules);
     }
 

@@ -50,8 +50,8 @@ public class SheduleService {
         return "Shedule not found";
     }
 
-    public List<Shedule> getbyDocterID(String docterID){
-        return Repo.findByDoctorName(docterID);
+    public List<Shedule> getbyDocterName(String doctorName){
+        return Repo.findByDoctorName(doctorName);
     }
 
     public Shedule getbyCustom(String doctorID, LocalDate day, String time){
