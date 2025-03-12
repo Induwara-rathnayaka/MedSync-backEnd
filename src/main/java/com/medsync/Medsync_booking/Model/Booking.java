@@ -25,4 +25,3 @@ public class Booking {
     private String time;
     
 }
- 

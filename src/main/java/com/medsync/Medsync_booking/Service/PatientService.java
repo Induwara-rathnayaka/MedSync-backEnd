@@ -45,7 +45,6 @@ public class PatientService {
 
     public Patient updatePatient(String id , Patient patient){
         if (Repo.existsById(id)) {
-            patient.setNIC(id);
             Patient newAdd = patient;
             newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
             
