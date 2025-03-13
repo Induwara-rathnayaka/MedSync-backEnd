@@ -22,6 +22,9 @@ public interface SheduleRepository extends MongoRepository<Shedule , String> {
 
     List<Shedule> findByDoctorNameAndDayGreaterThanEqual(String doctorName , LocalDate todayDate);
 
+    @Query("{ 'doctorName' : ?0 , 'day' : ?1 , 'time' : ?2 }")
+    Optional<Shedule> findByDoctorNameAndDayAndTime(String doctorName, LocalDate day, String time);
+
     
 
 }

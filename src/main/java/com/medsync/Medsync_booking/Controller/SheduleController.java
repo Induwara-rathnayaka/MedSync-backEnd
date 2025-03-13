@@ -89,9 +89,9 @@ public class SheduleController {
         : ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/incrementShedule/{doctorID}/{day}/{time}")
-    public ResponseEntity<String> incrementShedule(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
-        String result = sheduleService.requestUp(doctorID,day,time);
+    @PutMapping("/incrementShedule/{doctorName}/{day}/{time}")
+    public ResponseEntity<String> incrementShedule(@PathVariable String doctorName , @PathVariable LocalDate day , @PathVariable String time ){
+        String result = sheduleService.requestUp(doctorName,day,time);
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();

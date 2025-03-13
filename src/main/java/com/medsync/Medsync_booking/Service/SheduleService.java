@@ -80,8 +80,8 @@ public class SheduleService {
         }
     }
 
-    public String requestUp(String doctorID, LocalDate day, String time) {
-        Optional<Shedule> optionalShedule = Repo.findByDoctorIDAndDayAndTime(doctorID, day, time);
+    public String requestUp(String doctorName, LocalDate day, String time) {
+        Optional<Shedule> optionalShedule = Repo.findByDoctorNameAndDayAndTime(doctorName, day , time);
     
         if (optionalShedule.isPresent()) {
             Shedule shedule = optionalShedule.get();
