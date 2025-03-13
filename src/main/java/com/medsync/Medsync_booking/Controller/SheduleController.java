@@ -57,9 +57,9 @@ public class SheduleController {
     }
 
     //delete shedule by id
-    @DeleteMapping({"/delete/{id}"})
-    public ResponseEntity<String> deleteShedule(@PathVariable String id) {
-        String result = sheduleService.deleteShedule(id);
+    @DeleteMapping({"/delete/{doctorID}/{day}/{time}"})
+    public ResponseEntity<String> deleteShedule(@PathVariable String doctorID, @PathVariable LocalDate day , @PathVariable String time ) {
+        String result = sheduleService.deleteShedule(doctorID, day ,time );
         return result != null 
         ? ResponseEntity.ok(result) 
         : ResponseEntity.notFound().build();

@@ -43,9 +43,10 @@ public class SheduleService {
         return null;
     }
 
-    public String deleteShedule(String id){
-        if (Repo.existsById(id)) {
-            Repo.deleteById(id);
+    public String deleteShedule(String doctorID, LocalDate day , String time ){
+        Optional<Shedule> search = Repo.findByDoctorIDAndDayAndTime(doctorID, day, time);
+        if (search.isPresent()) {
+            Repo.deleteById(search.get().getID());
             return "Delete Suscessfull";
         }
         return "Shedule not found";
@@ -101,6 +102,8 @@ public class SheduleService {
         Repo.deleteByDoctorID(doctorID);
         return "Delete Sucsessfull";
     }
+
+
 }
     
 
