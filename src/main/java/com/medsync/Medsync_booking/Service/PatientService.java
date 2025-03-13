@@ -43,14 +43,19 @@ public class PatientService {
         return Repo.findAll();
     }
 
-    public Patient updatePatient(String id , Patient patient){
-        if (Repo.existsById(id)) {
+    public String updatePatient(String email , Patient patient){
+
+        Optional<Patient> searchPa = Repo.findByEmail(email);
+
+        if (searchPa.isPresent()) {
             Patient newAdd = patient;
+            newAdd.setId(searchPa.get().getId());
+            newAdd.setEmail(searchPa.get().getEmail());
             newAdd.setPassword(passwordEncoder.encode(newAdd.getPassword()));
-            
-            return Repo.save(newAdd);
+            Repo.save(newAdd);
+            return "Paitient Updated";
         }
-        return null;
+        return "Not Paitient in this Email";
     }
 
     public String deletePatient(String id){
@@ -87,7 +92,7 @@ public class PatientService {
 
         else{
 
-            return "Patient not found";
+            return "Not paitient in this Email";
             
         }
     }

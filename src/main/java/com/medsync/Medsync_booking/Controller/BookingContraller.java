@@ -85,4 +85,12 @@ public class BookingContraller {
         : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping({"/deleteBydoctorId/{doctorID}"})
+    public ResponseEntity<String> deleByDoctorId(@PathVariable String doctorID ){
+        String result = bookingService.deleByDoctorId(doctorID);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
+
 }

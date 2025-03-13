@@ -55,8 +55,8 @@ public class PatientController {
 
     //update paitent by id
     @PutMapping({"/upload/{id}"})
-    public ResponseEntity<Patient> updatePatient(@PathVariable String id, @RequestBody Patient patient) {
-        Patient upPatienn = patientService.updatePatient(id, patient);        
+    public ResponseEntity<String> updatePatient(@PathVariable String id, @RequestBody Patient patient) {
+        String upPatienn = patientService.updatePatient(id, patient);        
         return upPatienn != null 
         ? ResponseEntity.ok(upPatienn) 
         : ResponseEntity.notFound().build();

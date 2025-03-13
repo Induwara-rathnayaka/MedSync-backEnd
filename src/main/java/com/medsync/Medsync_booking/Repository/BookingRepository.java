@@ -15,4 +15,6 @@ public interface BookingRepository extends MongoRepository<Booking, String>{
 
     Booking findByPatientEmailAndDoctorNameAndDayAndTime(String patientEmail, String doctorName, LocalDate day, String time);
 
+    void deleteByDocterId(String docterId);
+
 }
