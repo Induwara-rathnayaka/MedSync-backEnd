@@ -70,5 +70,10 @@ public class BookingService {
             return book;
     }
 
+    public String deleByDoctorId(String doctorID){
+        Repo.deleteByDocterId(doctorID);
+        return "Delete Sucsessfull";
+    }
+
     
 }
