@@ -16,12 +16,13 @@ public class SheduleService {
     @Autowired
     SheduleRepository Repo;
 
-    public Shedule creatShedule(Shedule shedule){
+    public String creatShedule(Shedule shedule){
         Optional<Shedule> shOptional = Repo.findByDoctorIDAndDayAndTime(shedule.getDoctorID(),shedule.getDay(),shedule.getTime());
         if(shOptional.isPresent()){
-            return null;
+            return "Alredy sheduled this time and date";
         }else{
-            return Repo.save(shedule);
+            Repo.save(shedule);
+            return "Schedul created!";
         }
     }
 

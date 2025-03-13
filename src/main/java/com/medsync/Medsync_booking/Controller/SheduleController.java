@@ -26,8 +26,8 @@ public class SheduleController {
 
     //create shedule
     @PostMapping({"/create"})
-    public ResponseEntity<Shedule> createShedule(@RequestBody Shedule shedule) {
-        Shedule createShedule = sheduleService.creatShedule(shedule);
+    public ResponseEntity<String> createShedule(@RequestBody Shedule shedule) {
+        String createShedule = sheduleService.creatShedule(shedule);
         return ResponseEntity.ok(createShedule);
     }
     
