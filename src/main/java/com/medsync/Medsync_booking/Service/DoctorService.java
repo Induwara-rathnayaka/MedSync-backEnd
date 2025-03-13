@@ -83,7 +83,7 @@ public class DoctorService {
 
         else{
 
-            return "Doctor not found";
+            return "Not Doctor in this Id";
             
         }
     }
