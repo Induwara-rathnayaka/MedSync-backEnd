@@ -23,7 +23,7 @@ public class BookingService {
             return "Booking Succsessfull";
             
         }else{
-            return "Altery Booked";
+            return "Alredy Booked";
         }
     }
 
@@ -74,6 +74,12 @@ public class BookingService {
         Repo.deleteByDocterId(doctorID);
         return "Delete Sucsessfull";
     }
+
+    public String deletebyShedule(String docterId, LocalDate day, String time){
+        Booking book = Repo.findByDocterIdAndDayAndTime(docterId, day, time);
+        Repo.deleteById(book.getId());
+        return "Delete Sucsessfull";
+}
 
     
 }
