@@ -93,4 +93,12 @@ public class BookingContraller {
         : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping({"/deletebyShedule/{doctorID}/{day}/{time}"})
+    public ResponseEntity<String> deletebyShedule(@PathVariable String doctorID , @PathVariable LocalDate day , @PathVariable String time ){
+        String result = bookingService.deletebyShedule(doctorID, day, time);
+        return result != null 
+        ? ResponseEntity.ok(result) 
+        : ResponseEntity.notFound().build();
+    }
+
 }
